@@ -12,7 +12,7 @@ import javax.persistence.ManyToOne;
  * 
  * @author Yura Kardach
  */
-@Entity
+@Entity(name="orders")
 public class Order implements Serializable {
 
 	@Id

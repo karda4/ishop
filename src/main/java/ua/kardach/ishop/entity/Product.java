@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,7 +20,7 @@ import javax.persistence.OneToOne;
 public class Product implements Serializable {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String name;
 	private BigDecimal price;
@@ -28,8 +29,9 @@ public class Product implements Serializable {
 	private List<Image> images;
 	@OneToOne
 	private ProductCategory productCategory;
-	private Boolean live;
-	
+	@Column(columnDefinition = "tinyint(1) default 1")
+	private boolean alive;
+
 	public Product() {
 
 	}
@@ -82,12 +84,12 @@ public class Product implements Serializable {
 		this.productCategory = productCategory;
 	}
 
-	public Boolean isLive() {
-		return live;
+	public boolean isAlive() {
+		return alive;
 	}
 
-	public void setLive(Boolean live) {
-		this.live = live;
+	public void setAlive(boolean alive) {
+		this.alive = alive;
 	}
 
 	@Override
@@ -97,7 +99,7 @@ public class Product implements Serializable {
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((images == null) ? 0 : images.hashCode());
-		result = prime * result + ((live == null) ? 0 : live.hashCode());
+		result = prime * result + (alive ? 1231 : 1237);
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((price == null) ? 0 : price.hashCode());
 		result = prime * result + ((productCategory == null) ? 0 : productCategory.hashCode());
@@ -128,10 +130,7 @@ public class Product implements Serializable {
 				return false;
 		} else if (!images.equals(other.images))
 			return false;
-		if (live == null) {
-			if (other.live != null)
-				return false;
-		} else if (!live.equals(other.live))
+		if (alive != other.alive)
 			return false;
 		if (name == null) {
 			if (other.name != null)
@@ -154,8 +153,7 @@ public class Product implements Serializable {
 	@Override
 	public String toString() {
 		return "Product [id=" + id + ", name=" + name + ", price=" + price + ", description=" + description + ", images="
-				+ images + ", productCategory=" + productCategory + ", live=" + live + "]";
+				+ images + ", productCategory=" + productCategory + ", live=" + alive + "]";
 	}
-	
-	
+
 }
