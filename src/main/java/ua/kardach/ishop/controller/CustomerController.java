@@ -26,13 +26,4 @@ public class CustomerController {
 		return service.findOne(id);
 	}
 
-	@RequestMapping("/save")
-	public String process() {
-		service.save(new Customer("Jack", "Smith"));
-		service.save(new Customer("Adam", "Johnson"));
-		service.save(new Customer("Kim", "Smith"));
-		service.save(new Customer("David", "Williams"));
-		service.save(new Customer("Peter", "Davis"));
-		return "Done";
-	}
 }

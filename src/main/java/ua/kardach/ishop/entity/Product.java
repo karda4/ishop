@@ -24,6 +24,7 @@ public class Product implements Serializable {
 	private Long id;
 	private String name;
 	private BigDecimal price;
+	@Column(length = 2000)
 	private String description;
 	@OneToMany
 	private List<Image> images;
