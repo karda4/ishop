@@ -2,6 +2,7 @@ package ua.kardach.ishop.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,6 +19,8 @@ public class ProductCategory implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String name;
+	@Column(nullable=true)
+	private ProductCategory super_category;
 
 	public ProductCategory() {
 
