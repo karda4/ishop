@@ -1,0 +1,59 @@
+DROP TABLE IF EXISTS customer CASCADE;
+DROP TABLE IF EXISTS image CASCADE;
+DROP TABLE IF EXISTS orders CASCADE;
+DROP TABLE IF EXISTS product CASCADE;
+DROP TABLE IF EXISTS product_images CASCADE;
+DROP TABLE IF EXISTS order_item CASCADE;
+DROP TABLE IF EXISTS order_order_items CASCADE;
+DROP TABLE IF EXISTS product_category CASCADE;
+
+CREATE TABLE customer(
+	id				BIGINT PRIMARY KEY	NOT NULL,
+	login			VARCHAR(255) 	NOT NULL,
+	password		VARCHAR(255) 	NOT NULL,
+	first_name		VARCHAR(255),
+	last_name		VARCHAR(255),
+	middle_name		VARCHAR(255),
+	phone			VARCHAR(255),
+	email			VARCHAR(255),
+	registered		SMALLINT 		DEFAULT 0
+);
+
+CREATE TABLE image(
+	id				BIGINT PRIMARY KEY	NOT NULL,
+	file_name		VARCHAR(255)
+);
+
+CREATE TABLE orders(
+	id				BIGINT PRIMARY KEY	NOT NULL,
+	customer_id		BIGINT UNIQUE REFERENCES customer(id)
+);
+
+CREATE TABLE product(
+	id				BIGINT PRIMARY KEY	NOT NULL,
+	name			VARCHAR(255) 		NOT NULL,
+	price			NUMERIC				NOT NULL,
+	description		VARCHAR(2000)
+);
+
+CREATE TABLE product_images(
+	product_id	BIGINT REFERENCES product(id),
+	images_id	BIGINT REFERENCES image(id)
+);
+CREATE TABLE order_item(
+	id				BIGINT PRIMARY KEY	NOT NULL,
+	order_id		BIGINT UNIQUE REFERENCES orders(id),
+	product_id		BIGINT UNIQUE REFERENCES product(id),
+	amount			INT,
+	total_price		INT
+);
+
+CREATE TABLE order_order_items(
+	order_id		BIGINT REFERENCES orders(id),
+	order_items_id	BIGINT UNIQUE REFERENCES order_item(id)
+);
+
+CREATE TABLE product_category(
+	id				BIGINT PRIMARY KEY	NOT NULL,
+	name			VARCHAR(255)
+);

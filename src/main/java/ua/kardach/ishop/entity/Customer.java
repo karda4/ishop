@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 
 /**
  * 
@@ -16,7 +17,8 @@ import javax.persistence.Id;
 public class Customer implements Serializable {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@SequenceGenerator(name = "customer_id_seq", sequenceName = "customer_id_seq", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "customer_id_seq")
 	private Long id;
 	@Column(nullable=false)
 	private String login;
@@ -27,7 +29,7 @@ public class Customer implements Serializable {
 	private String middleName;
 	private String phone;
 	private String email;
-	@Column(columnDefinition="tinyint(1) default 0")
+	//@Column(columnDefinition="SMALLINT DEFAULT 0")
 	private boolean registered;
 
 	public Customer() {

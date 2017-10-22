@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 
 /**
  * 
@@ -20,9 +21,12 @@ import javax.persistence.OneToOne;
 public class Product implements Serializable {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@SequenceGenerator(name = "product_id_seq", sequenceName = "product_id_seq", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_id_seq")
 	private Long id;
+	@Column(nullable = false)
 	private String name;
+	@Column(nullable = false)
 	private BigDecimal price;
 	@Column(length = 2000)
 	private String description;
@@ -30,7 +34,7 @@ public class Product implements Serializable {
 	private List<Image> images;
 	@OneToOne
 	private ProductCategory productCategory;
-	@Column(columnDefinition = "tinyint(1) default 1")
+	//@Column(columnDefinition = "SMALLINT DEFAULT 1")
 	private boolean alive;
 
 	public Product() {

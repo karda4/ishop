@@ -25,5 +25,13 @@ public class CustomerController {
 	public Customer findOne(@PathVariable Long id) {
 		return service.findOne(id);
 	}
-
+	
+	@RequestMapping("customer/save")
+	public Customer save() {
+		Customer customer = new Customer();
+		customer.setLogin("yura");
+		customer.setPassword("123");
+		customer = service.save(customer);
+		return customer;
+	}
 }

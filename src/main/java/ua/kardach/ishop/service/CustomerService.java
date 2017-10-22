@@ -22,7 +22,7 @@ public class CustomerService {
 		return repository.findOne(id);
 	}
 	
-	public void save(Customer customer) {
-		repository.save(customer);
+	public Customer save(Customer customer) {
+		return repository.save(customer);
 	}
 }
