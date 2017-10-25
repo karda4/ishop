@@ -7,8 +7,15 @@ DROP TABLE IF EXISTS order_item CASCADE;
 DROP TABLE IF EXISTS order_order_items CASCADE;
 DROP TABLE IF EXISTS product_category CASCADE;
 
+DROP SEQUENCE IF EXISTS customer_id_seq CASCADE;
+DROP SEQUENCE IF EXISTS image_id_seq CASCADE;
+DROP SEQUENCE IF EXISTS orders_id_seq CASCADE;
+DROP SEQUENCE IF EXISTS product_id_seq CASCADE;
+DROP SEQUENCE IF EXISTS order_item_id_seq CASCADE;
+DROP SEQUENCE IF EXISTS product_category_id_seq CASCADE;
+
 CREATE TABLE customer(
-	id				BIGINT PRIMARY KEY	NOT NULL,
+	id				SERIAL PRIMARY KEY,
 	login			VARCHAR(255) 	NOT NULL,
 	password		VARCHAR(255) 	NOT NULL,
 	first_name		VARCHAR(255),
@@ -20,20 +27,27 @@ CREATE TABLE customer(
 );
 
 CREATE TABLE image(
-	id				BIGINT PRIMARY KEY	NOT NULL,
+	id				SERIAL PRIMARY KEY,
 	file_name		VARCHAR(255)
 );
 
 CREATE TABLE orders(
-	id				BIGINT PRIMARY KEY	NOT NULL,
+	id				SERIAL PRIMARY KEY,
 	customer_id		BIGINT UNIQUE REFERENCES customer(id)
 );
 
+CREATE TABLE product_category(
+	id				SERIAL PRIMARY KEY,
+	name			VARCHAR(255)
+);
+
 CREATE TABLE product(
-	id				BIGINT PRIMARY KEY	NOT NULL,
+	id				SERIAL PRIMARY KEY,
 	name			VARCHAR(255) 		NOT NULL,
 	price			NUMERIC				NOT NULL,
-	description		VARCHAR(2000)
+	description		VARCHAR(2000),
+	product_category_id	BIGINT REFERENCES product_category(id),
+	alive			SMALLINT 			DEFAULT 1
 );
 
 CREATE TABLE product_images(
@@ -41,7 +55,7 @@ CREATE TABLE product_images(
 	images_id	BIGINT REFERENCES image(id)
 );
 CREATE TABLE order_item(
-	id				BIGINT PRIMARY KEY	NOT NULL,
+	id				SERIAL PRIMARY KEY,
 	order_id		BIGINT UNIQUE REFERENCES orders(id),
 	product_id		BIGINT UNIQUE REFERENCES product(id),
 	amount			INT,
@@ -51,9 +65,4 @@ CREATE TABLE order_item(
 CREATE TABLE order_order_items(
 	order_id		BIGINT REFERENCES orders(id),
 	order_items_id	BIGINT UNIQUE REFERENCES order_item(id)
-);
-
-CREATE TABLE product_category(
-	id				BIGINT PRIMARY KEY	NOT NULL,
-	name			VARCHAR(255)
 );
