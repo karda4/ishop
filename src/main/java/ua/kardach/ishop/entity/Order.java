@@ -11,14 +11,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
-import lombok.Data;
-
 /**
  * 
  * @author Yura Kardach
  */
 @Entity(name="orders")
-@Data
 public class Order implements Serializable {
 
 	@Id

@@ -13,14 +13,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
-import lombok.Data;
-
 /**
  * 
  * @author Yura Kardach
  */
 @Entity
-@Data
 public class Product implements Serializable {
 
 	@Id

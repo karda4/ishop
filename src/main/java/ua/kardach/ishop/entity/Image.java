@@ -8,14 +8,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 
-import lombok.Data;
-
 /**
  * 
  * @author Yura Kardach
  */
 @Entity
-@Data
 public class Image implements Serializable {
 
 	@Id

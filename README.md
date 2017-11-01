@@ -1,5 +1,9 @@
 ###Postgres DB:
 ```
+#install Postgresql
+sudo apt-get update
+sudo apt-get install postgresql postgresql-contrib
+
 # set timezone = 'UTC' in postgresq.conf
 sudo vi /etc/postgresql/9.5/main/postgresql.conf
 

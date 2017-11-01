@@ -9,14 +9,11 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
-import lombok.Data;
-
 /**
  * 
  * @author Yura Kardach
  */
 @Entity
-@Data
 public class OrderItem implements Serializable {
 
 	@Id
